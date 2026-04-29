@@ -119,12 +119,15 @@ module.exports = {
   },
   filterProperties: (req, res) => {
     var query = {};
-    if (req.query.propertyFor)
+    // FIXED: Added typeof checks to prevent unhandled exceptions
+    if (req.query.propertyFor && typeof req.query.propertyFor === 'string')
       query['propertyFor'] = { $in: req.query.propertyFor.split(",") }
-    if (req.query.type)
+    if (req.query.type && typeof req.query.type === 'string')
       query['type'] = { $in: req.query.type.split(",") }
-    if (req.query.city)
+    if (req.query.city && typeof req.query.city === 'string')
       query['city'] = { $in: req.query.city.split(",") }
+    // ... rest of the function ...filterProperties: (req, res) => {
+    var query = {};
     if (req.query.userId)
       query['userId'] = req.query.userId
     if (req.query.notUserId)

